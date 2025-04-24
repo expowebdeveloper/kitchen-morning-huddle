@@ -57,4 +57,18 @@ class DinersList(BaseModel):
         return cls(**data)
     
 if __name__ == "__main__":
-    diners_list = DinersList.load_from_json("fine-dining-dataset.json")    
+    diners_list = DinersList.load_from_json("fine-dining-dataset.json")
+    # Print some basic information
+    print(f"Total number of diners: {len(diners_list.diners)}")
+    
+    # Print details for each diner
+    for diner in diners_list.diners:
+        print(f"\nDiner: {diner.name}")
+        if diner.reviews:
+            print(f"  Number of reviews: {len(diner.reviews)}")
+            for review in diner.reviews:
+                print(f"    - {review.restaurant_name}: {review.rating}/5 stars")
+        if diner.reservations:
+            print(f"  Number of reservations: {len(diner.reservations)}")
+            for reservation in diner.reservations:
+                print(f"    - Date: {reservation.date}, People: {reservation.number_of_people}")
